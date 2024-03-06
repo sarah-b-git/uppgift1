@@ -11,7 +11,7 @@ public class ConverterTest {
         String expected = "-*- ";
         //Act
         String testData = "k";
-        String actual = convert.findMatch(testData);
+        String actual = convert.getMorse(testData);
         //Assert
         assertEquals(expected, actual);
     }
@@ -21,7 +21,7 @@ public class ConverterTest {
         String expected = "c";
 
         String testData = "-*-*";
-        String actual = convert.findMatch(testData);
+        String actual = convert.getEnglish(testData);
 
         assertEquals(expected, actual);
     }
@@ -32,7 +32,7 @@ public class ConverterTest {
         String expected = "Unrecognized input!";
 
         String testData = "ä";
-        String actual = convert.findMatch(testData);
+        String actual = convert.getMorse(testData);
 
         assertEquals(expected,actual);
     }
@@ -43,7 +43,7 @@ public class ConverterTest {
         String expected = "*- ";
 
         String testData = "A";
-        String actual = convert.findMatch(testData);
+        String actual = convert.getMorse(testData);
 
         assertEquals(expected, actual);
     }
@@ -54,7 +54,7 @@ public class ConverterTest {
         String expected = "-** --- --* ";
 
         String testData = "Dog";
-        String actual = convert.findMatch(testData);
+        String actual = convert.getMorse(testData);
 
         assertEquals(expected, actual);
     }
@@ -65,7 +65,29 @@ public class ConverterTest {
         String expected = "Unrecognized input!";
 
         String testData = "förskola";
-        String actual = convert.findMatch(testData);
+        String actual = convert.getMorse(testData);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void englishWord(){
+        Converter convert = new Converter();
+        String expected = "**** * -*-- ";
+
+        String testData = "hey";
+        String actual = convert.getMorse(testData);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testNumber(){
+        Converter convert = new Converter();
+        String expected = "*---- ";
+
+        String testData = "1";
+        String actual = convert.getMorse(testData);
 
         assertEquals(expected, actual);
     }
@@ -73,17 +95,25 @@ public class ConverterTest {
     @Test
     public void morseWord(){
         Converter convert = new Converter();
-        String expected = "**** * -*-- ";
+        String expected = "egg";
 
-        String testData = "hey";
-        String actual = convert.findMatch(testData);
+        String testData = "* --* --*";
+        String actual = convert.getEnglish(testData);
 
         assertEquals(expected, actual);
     }
 
     @Test
-    public void blendedEngMor(){
+    public void wordNumCombo(){
         Converter convert = new Converter();
+        String expected = "**--- * --* --* *** ";
+
+        String testData = "2eggs";
+        String actual = convert.getMorse(testData);
+
+        assertEquals(expected, actual);
+
     }
+
 
 }

@@ -63,8 +63,29 @@ public class Converter {
         map.put("-*--", "y");
         map.put("z", "--**");
         map.put("--**", "z");
+        map.put("1", "*----");
+        map.put("*----", "1");
+        map.put("2", "**---");
+        map.put("**---", "2");
+        map.put("3", "***--");
+        map.put("***--", "3");
+        map.put("4", "****-");
+        map.put("****-", "4");
+        map.put("5", "*****");
+        map.put("*****", "5");
+        map.put("6", "-****");
+        map.put("-****", "6");
+        map.put("7", "--***");
+        map.put("--***", "7");
+        map.put("8", "---**");
+        map.put("---**", "8");
+        map.put("9", "----*");
+        map.put("----*", "9");
+        map.put("0", "-----");
+        map.put("-----", "0");
     }
 
+    //One method for all conversions is too clunky, split into two methods instead
     public String findMatch(String input) {
         input = input.toLowerCase();
         String[] inputArray;
@@ -94,6 +115,38 @@ public class Converter {
             }
             return output;
         }
+    }
+
+   public String getMorse(String input){
+        output = "";
+        input = input.toLowerCase();
+       for (int i = 0; i < input.length(); i++) {
+           if (map.get(String.valueOf(input.charAt(i))) != null) {
+               output += map.get(String.valueOf(input.charAt(i))) + " ";
+           } else {
+               System.out.println(error);
+               return error;
+           }
+       }
+       System.out.println(output);
+       return output;
+    }
+
+    public String getEnglish(String input){
+        output = "";
+        String[] inputArray;
+        inputArray = input.split(" ");
+        for(int i = 0; i < inputArray.length; i++){
+            if(map.get(inputArray[i]) != null){
+                output += map.get(inputArray[i]);
+            }else {
+                System.out.println(error);
+                return error;
+            }
+        }
+        System.out.println(output);
+        return output;
+
     }
 
 
