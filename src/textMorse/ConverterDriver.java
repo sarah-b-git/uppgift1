@@ -23,7 +23,7 @@ public class ConverterDriver {
                         convert.getMorse(engText);
                         break;
                     case 2:
-                        System.out.println("Enter morse code, use spaces to separate letters:");
+                        System.out.println("Enter morse code, use single spaces to separate letters:");
                         String morseText = scan.nextLine();
                         convert.getEnglish(morseText);
                         break;

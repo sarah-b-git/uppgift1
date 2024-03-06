@@ -112,8 +112,45 @@ public class ConverterTest {
         String actual = convert.getMorse(testData);
 
         assertEquals(expected, actual);
-
     }
+
+    //If input contains mix of english and morse it should be rejected
+    @Test
+    public void mixEngMor(){
+        Converter convert = new Converter();
+        String expected = "You can't enter morse code here.";
+
+        String testData = "h*y";
+        String actual = convert.getMorse(testData);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void mixMorEng(){
+        Converter convert = new Converter();
+        String expected = "You can only enter morse code here.";
+
+        String testData = "* hi.";
+        String actual = convert.getEnglish(testData);
+
+        assertEquals(expected, actual);
+    }
+
+    //Test if punctuation and numbers work properly
+    @Test
+    public void engToMorPunctuation(){
+        Converter convert = new Converter();
+        String expected = "**** *---- **--** ";
+
+        String testData = "H1?";
+        String actual = convert.getMorse(testData);
+
+        assertEquals(expected, actual);
+    }
+
+
+
 
 
 }

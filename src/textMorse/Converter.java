@@ -8,6 +8,8 @@ public class Converter {
     private HashMap<String, String> map;
     private String output = "";
     private String error = "Unrecognized input!";
+    private String errorNoMorse = "You can't enter morse code here.";
+    private String errorNoEnglish = "You can only enter morse code here.";
 
     public Converter() {
         map = new HashMap<>();
@@ -83,6 +85,12 @@ public class Converter {
         map.put("----*", "9");
         map.put("0", "-----");
         map.put("-----", "0");
+        map.put(".", "*-*-*-");
+        map.put("*-*-*-", ".");
+        map.put(",", "--**--");
+        map.put("--**--", ",");
+        map.put("?", "**--**");
+        map.put("**--**", "?");
     }
 
     //One method for all conversions is too clunky, split into two methods instead
@@ -90,7 +98,7 @@ public class Converter {
         input = input.toLowerCase();
         String[] inputArray;
         //If input contains letters, numbers
-        //Use regex - doesn't work with any punctuation in regex, why?
+        //Use regex - doesn't work with any punctuation in regex, why? ---- need special notation for period
         //REFACTOR - save each letter in an array, use split("") or charAt()
         Pattern pattern = Pattern.compile("[a-z]|[0-9]");
         Matcher matcher = pattern.matcher(input);
@@ -120,6 +128,15 @@ public class Converter {
    public String getMorse(String input){
         output = "";
         input = input.toLowerCase();
+        Pattern pattern = Pattern.compile("[*-]");
+        Matcher matcher = pattern.matcher(input);
+
+        if(matcher.find()){
+            System.out.println(errorNoMorse);
+            return errorNoMorse;
+
+        }
+
        for (int i = 0; i < input.length(); i++) {
            if (map.get(String.valueOf(input.charAt(i))) != null) {
                output += map.get(String.valueOf(input.charAt(i))) + " ";
@@ -134,6 +151,14 @@ public class Converter {
 
     public String getEnglish(String input){
         output = "";
+        Pattern pattern = Pattern.compile("[a-zA-z0-9?.,]");
+        Matcher matcher = pattern.matcher(input);
+
+        if(matcher.find()){
+            System.out.println(errorNoEnglish);
+            return errorNoEnglish;
+        }
+
         String[] inputArray;
         inputArray = input.split(" ");
         for(int i = 0; i < inputArray.length; i++){
