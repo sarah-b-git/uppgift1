@@ -149,6 +149,18 @@ public class ConverterTest {
         assertEquals(expected, actual);
     }
 
+    //Test that converter can handle sentences in english
+    @Test
+    public void sentenceToMor(){
+        Converter convert = new Converter();
+        String expected = "**** ** *-*-*-   **** * -*-- **--** ";
+
+        String testData = "hi. hey?";
+        String actual = convert.getMorse(testData);
+
+        assertEquals(expected, actual);
+    }
+
 
 
 

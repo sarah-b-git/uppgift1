@@ -91,39 +91,9 @@ public class Converter {
         map.put("--**--", ",");
         map.put("?", "**--**");
         map.put("**--**", "?");
+        map.put(" ", " ");
     }
 
-    //One method for all conversions is too clunky, split into two methods instead
-    public String findMatch(String input) {
-        input = input.toLowerCase();
-        String[] inputArray;
-        //If input contains letters, numbers
-        //Use regex - doesn't work with any punctuation in regex, why? ---- need special notation for period
-        //REFACTOR - save each letter in an array, use split("") or charAt()
-        Pattern pattern = Pattern.compile("[a-z]|[0-9]");
-        Matcher matcher = pattern.matcher(input);
-        if (matcher.find()) {
-            for (int i = 0; i < input.length(); i++) {
-                if (map.get(String.valueOf(input.charAt(i))) != null) {
-                    output += map.get(String.valueOf(input.charAt(i))) + " ";
-                } else {
-                    return error;
-                }
-            }
-            return output;
-            //ELSE = INPUT CONTAINS MORSE, SPLIT STRING THEN FOLLOW MATCH PROCEDURE W/ARRAY
-        } else {
-            inputArray = input.split(" ");
-            for(int i = 0; i < inputArray.length; i++){
-                if(map.get(inputArray[i]) != null){
-                    output += map.get(inputArray[i]);
-                }else {
-                    return error;
-                }
-            }
-            return output;
-        }
-    }
 
    public String getMorse(String input){
         output = "";
